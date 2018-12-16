@@ -1,0 +1,68 @@
+import warnings
+warnings.filterwarnings('ignore')
+
+$PROMPT = '{branch_color}{curr_branch:{} }{NO_COLOR}[{#5CCEF4}{cwd_base}{NO_COLOR}] ! '
+$PROMPT = '{vte_new_tab_cwd}' + $PROMPT
+$PROMPT = '{env_name:{} }' + $PROMPT
+
+# xontribs
+xontrib load vox
+#xontrib load mpl
+xontrib load jedi
+xontrib load bashisms
+xontrib load coreutils
+xontrib load xonda
+#xontrib load vox_tabcomplete
+xontrib load z
+
+# some customization options
+aliases['exec'] = aliases['xexec']
+aliases['l'] = 'ls -CF'
+aliases['ll'] = 'ls -alF'
+aliases['la'] = 'ls -A'
+aliases['l'] = 'ls -CF'
+aliases['lh'] = 'ls -lh'
+
+$XONSH_SHOW_TRACEBACK = True
+$XONSH_STORE_STDOUT = True
+
+$VI_MODE = True
+$EDITOR = "nvim"
+
+$TERM="xterm-256color"
+#$XONSH_COLOR_STYLE = "rrt"
+$XONSH_COLOR_STYLE = "monokai"
+
+#$SHELL_TYPE='readline'
+# prompt_toolkit options
+$COMPLETIONS_CONFIRM=True
+$AUTO_SUGGEST=False
+$FUZZY_PATH_COMPLETION=True
+$SUBSEQUENCE_PATH_COMPLETION=True
+$COMPLETIONS_DISPLAY="single"
+$XONSH_HISTORY_BACKEND = 'sqlite'
+
+
+## HOST-SPECIFIC ##
+
+# aliases
+# aliases['source'](['/home/david/.xonsh_aliases'])
+
+$HOSTNAME = 'vita'
+
+# local bin
+$PATH.insert(0, '/home/david/.local/bin')
+#$PATH.append('/home/david/node_modules/.bin')
+#$PATH.append('/home/david/Scripts/')
+
+# python modules
+from datreant import *
+
+# rust
+#$PATH.append('/home/david/.cargo/bin')
+
+for i in ('glances', 'yaourt'):
+    __xonsh__.commands_cache.threadable_predictors[i] = lambda args: False
+
+
+def miniconda(): $PATH.insert(0, "/opt/miniconda3/bin")

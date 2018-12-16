@@ -1,0 +1,4 @@
+#!/bin/bash
+
+polybar secondary &
+$HOME/.config/bspwm/wallpaper.sh
