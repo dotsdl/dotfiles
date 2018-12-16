@@ -18,3 +18,11 @@ This repo features configs for the following so far.
 - `sxhkd`: keyboard shortcut daemon
 - `polybar`: status bar
 - `autorandr`: automatic xrandr switching for external monitors
+
+
+## Setup notes
+
+I use `bspwm` started under a `gnome-session` instance, which spawns the daemons that typically are running when using Gnome Shell.
+It has the added benefit of running everything under the `gdm` display manager.
+You can create this setup using [bspwm-gnome](https://github.com/dotsdl/bspwm-gnome).
+Big thanks to [shizonic](https://github.com/shizonic) for making this work!
