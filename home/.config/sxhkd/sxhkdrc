@@ -39,6 +39,10 @@ ctrl + shift + L
 super + Return
     gnome-terminal
 
+# web browser
+super + shift + Return
+    firefox
+
 # home folder
 ctrl + shift + h
     nautilus -w
