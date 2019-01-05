@@ -141,7 +141,7 @@ super + grave
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-    bspc desktop -f {prev,next}.local
+    bspc desktop -f {prev,next}.local && bspc desktop last.local.!occupied -r
 
 # move desktop
 super + ctrl + shift + bracket{left,right}
@@ -149,9 +149,9 @@ super + ctrl + shift + bracket{left,right}
 
 # add and remove desktops
 super + d
-    bspc monitor -a neue && bspc desktop -f any.local.!occupied
+    bspc desktop -f any.local.!occupied || bspc monitor -a neue && bspc desktop -f any.local.!occupied
 super + shift + d
-    bspc desktop focused -r
+    bspc node -d any.local.!occupied --follow || bspc monitor -a neue && bspc node -d any.local.!occupied --follow
 
 # move window to the next/previous desktop in the current monitor
 super + shift bracketleft
