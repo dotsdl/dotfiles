@@ -148,7 +148,7 @@ super + bracket{left,right}
     bspc desktop -f {prev,next}.local && bspc desktop last.local.!occupied -r
 
 # move desktop
-super + ctrl + shift + bracket{left,right}
+super + ctrl + bracket{left,right}
     bspc desktop -s {prev,next}.local --follow
 
 # add and remove desktops
