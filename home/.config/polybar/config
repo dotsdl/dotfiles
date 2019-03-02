@@ -9,7 +9,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #1a1e25
+background = #222222
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -50,7 +50,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm
 modules-center =
-modules-right = date xbacklight pulseaudio filesystem cpu memory battery temperature eth wlan 
+modules-right = date backlight-acpi pulseaudio filesystem cpu memory battery temperature eth wlan
 
 tray-position = center
 tray-padding = 10 

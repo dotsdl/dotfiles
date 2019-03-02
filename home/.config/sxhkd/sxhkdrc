@@ -20,9 +20,9 @@ XF86AudioMicMute
 
 # screen brightness
 XF86MonBrightnessUp 
-    xbacklight -inc 5 # increase screen brightness
+    light -A 5 # increase screen brightness
 XF86MonBrightnessDown
-    xbacklight -dec 5 # increase screen brightness
+    light -U 5 # increase screen brightness
 
 # media player
 super + ctrl + Right
