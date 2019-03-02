@@ -150,30 +150,30 @@ super + grave
     bspc node -f last
 
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
+super + {i,o}
     bspc desktop -f {prev,next}.local && bspc desktop last.local.!occupied -r
 
 # move desktop
-super + ctrl + bracket{left,right}
+super + ctrl + {i,o}
     bspc desktop -s {prev,next}.local --follow
 
-# add and remove desktops
+# switch to unoccupied desktop; take selected node with
 super + d
     bspc desktop -f any.local.!occupied || bspc monitor -a neue && bspc desktop -f any.local.!occupied
 super + shift + d
     bspc node -d any.local.!occupied --follow || bspc monitor -a neue && bspc node -d any.local.!occupied --follow
 
 # move window to the next/previous desktop in the current monitor
-super + shift bracketleft
+super + shift + i
     bspc node -d prev.local --follow #; bspc desktop -f prev.local ; bspc node -f prev.local
-super + shift bracketright
+super + shift + o
     bspc node -d next.local --follow #; bspc desktop -f next.local ; bspc node -f prev.local
 
 # focus the older or newer node in the focus history
-super + {o,i}
-    bspc wm -h off; \
-    bspc node {older,newer} -f; \
-    bspc wm -h on
+#super + {o,i}
+#    bspc wm -h off; \
+#    bspc node {older,newer} -f; \
+#    bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -226,11 +226,11 @@ super + shift + z
 #
 # monitor
 #
-ctrl + alt + {_,shift + }{j,k}
+ctrl + alt + {_,super + }{j,k}
     bspc {monitor -f,desktop -m} {south,north} --follow
 
 # move the node to monitor in the given direction
-super + ctrl + alt + {h,j,k,l}
+shift + ctrl + alt + {h,j,k,l}
     bspc node -m {west,south,north,east} --follow
 
 # receptacle
