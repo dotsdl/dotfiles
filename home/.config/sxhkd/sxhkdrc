@@ -3,6 +3,11 @@
 #
 #
 
+
+# screenshot
+Print
+    gnome-screenshot
+
 # audio
 XF86AudioRaiseVolume 
     pactl set-sink-volume 0 +5% #increase sound volume
@@ -19,6 +24,7 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
     xbacklight -dec 5 # increase screen brightness
 
+# media player
 super + ctrl + Right
     playerctl next
 super + ctrl + Left
@@ -30,10 +36,10 @@ super + ctrl + Up
 
 # lock screen
 XF86PowerOff
-    i3lock -c 000000 && sleep 1 && systemctl suspend
+    i3lock -c 000000 -u && sleep 1 && systemctl suspend
 
 ctrl + shift + L
-    i3lock -c 000000 && sleep 1
+    i3lock -c 000000 -u && sleep 1
 
 # terminal emulator
 super + Return
