@@ -34,8 +34,10 @@ $HOME/.config/bspwm/wallpaper.sh
 compton -bc -t -8 -l -9 -r 6 -o 1.0 &
 #devilspie2 &
 #dropbox &
+
 nm-applet &
 bash -c "xset r rate 200 30"
 /usr/bin/polybar main &
+plank &
 redshift -t 6500:3500 -b 1.0:0.7 &
-xautolock -time 15 -locker "i3lock -c 000000 && sleep 1" &
+xautolock -time 15 -locker "i3lock -c 000000 -u && sleep 1" &
