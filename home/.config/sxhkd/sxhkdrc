@@ -236,3 +236,8 @@ shift + ctrl + alt + {h,j,k,l}
 # receptacle
 #super + shift + Return
 #    bspc node focused -i
+
+# increase, decrease window gap
+super + {_,shift +}n
+    bspc config window_gap $(($(bspc config window_gap){+,-}1))
+
