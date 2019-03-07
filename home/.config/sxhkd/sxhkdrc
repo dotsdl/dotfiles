@@ -239,5 +239,5 @@ shift + ctrl + alt + {h,j,k,l}
 
 # increase, decrease window gap
 super + {_,shift +}n
-    bspc config window_gap $(($(bspc config window_gap){+,-}1))
+    bspc config window_gap $(($(bspc config window_gap){+,-}5))
 
