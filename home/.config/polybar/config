@@ -13,15 +13,16 @@ background = #222222
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
-foreground-alt = #555
+foreground-alt = #999
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-arch = #1793d0
+#arch = #1793d0
+arch = #d0174a
 
 [bar/main]
-monitor = ${env:MONITOR:eDP1}
+monitor = ${env:MONITOR:eDP-1}
 width = 100%
 height = 27
 ;offset-x = 1%
@@ -44,13 +45,17 @@ padding-right = 2
 module-margin-left = 2
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-0 = Cantarell:pixelsize=10;1
+font-1 = Inconsolata:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
+
+#font-0 = fixed:pixelsize=10;1
+#font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+#font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm
 modules-center =
-modules-right = date backlight-acpi pulseaudio filesystem cpu memory battery temperature eth wlan
+modules-right = cpu memory battery temperature backlight-acpi pulseaudio filesystem date eth wlan 
 
 tray-position = center
 tray-padding = 10 
@@ -72,7 +77,8 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/secondary]
-monitor = 
+;monitor = ${env:MONITOR:HDMI-2}
+monitor = ${env:MONITOR:DP-2}
 width = 100%
 height = 27
 ;offset-x = 1%
@@ -95,13 +101,13 @@ padding-right = 2
 module-margin-left = 2
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-0 = Cantarell:pixelsize=10;1
+font-1 = Inconsolata:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm
 modules-center = 
-modules-right = date pulseaudio filesystem cpu memory battery temperature eth wlan 
+modules-right = cpu memory battery temperature pulseaudio filesystem date eth wlan 
 
 #tray-position = center
 tray-padding = 10
@@ -124,7 +130,7 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -147,8 +153,9 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
+mount-1 = /home
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#999}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -238,11 +245,11 @@ format = <label>
 label = %percentage%%
 
 ; Only applies if <ramp> is used
-ramp-0 = 🌕
-ramp-1 = 🌔
-ramp-2 = 🌓
-ramp-3 = 🌒
-ramp-4 = 🌑
+ramp-0 = 1
+ramp-1 = 2
+ramp-2 = 3
+ramp-3 = 4
+ramp-4 = 5
 
 ; Only applies if <bar> is used
 bar-width = 10
@@ -287,10 +294,11 @@ label = %percentage_used:3%%
 
 [module/wlan]
 type = internal/network
-interface = wlp4s0
+interface = wlp0s20f3
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
+#format-connected = <label-connected>
+format-connected = "+"
 format-connected-underline = ${colors.arch}
 label-connected = %essid%
 
@@ -327,8 +335,8 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = " %Y-%m-%d"
-date-alt = " %Y-%m-%d"
+date = " %Y.%m.%d"
+date-alt = " %Y.%m.%d"
 
 time = %H:%M
 time-alt = %H:%M:%S
@@ -345,7 +353,7 @@ type = internal/pulseaudio
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
 #sink = alsa_output.pci-0000_12_00.3.analog-stereo
-sink = 
+sink = "@DEFAULT_SINK@"
 
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
@@ -361,7 +369,7 @@ interval = 5
 ;   <bar-volume>
 format-volume-prefix = "V: "
 format-volume-prefix-foreground = ${colors.foreground-alt}
-format-volume = <ramp-volume> <label-volume>
+format-volume = <label-volume>
 
 ; Available tags:
 ;   <label-muted> (default)
@@ -377,7 +385,7 @@ format-volume = <ramp-volume> <label-volume>
 ;   %percentage% (default)
 format-muted-prefix = "V: "
 format-muted-prefix-foreground = ${colors.foreground-alt}
-label-muted = 🔇 muted
+label-muted = muted
 label-muted-foreground = #666
 
 ; Only applies if <ramp-volume> is used
@@ -415,18 +423,18 @@ ramp-volume-2 = 🔊
 
 [module/battery]
 type = internal/battery
-battery = BAT1
+battery = BAT0
 adapter = AC
 full-at = 95
 
 format-charging-prefix = "P: "
 format-charging-prefix-foreground = ${colors.foreground-alt}
-format-charging = <animation-charging> <label-charging>
+format-charging = <label-charging>
 format-charging-underline = ${colors.arch}
 
 format-discharging-prefix = "P: "
 format-discharging-prefix-foreground = ${colors.foreground-alt}
-format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = <label-discharging>
 format-discharging-underline = ${colors.arch}
 
 #format-prefix = "P: "
@@ -436,7 +444,7 @@ format-full-underline = ${colors.arch}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-2 = R
 ramp-capacity-foreground = ${colors.foreground-alt}
 
 animation-charging-0 = 
@@ -452,20 +460,20 @@ warn-temperature = 60
 
 format-prefix = "T: "
 format-prefix-foreground = ${colors.foreground-alt}
-format = <ramp> <label>
+format = <label>
 format-underline = ${colors.arch}
 format-warn-prefix = "T: "
 format-warn-prefix-foreground = ${colors.foreground-alt}
-format-warn = <ramp> <label-warn>
+format-warn = <label-warn>
 format-warn-underline = ${colors.alert}
 
-label = %temperature%
-label-warn = %temperature%
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = E
+ramp-1 = I
+ramp-2 = O
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]

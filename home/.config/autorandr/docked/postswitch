@@ -2,3 +2,6 @@
 
 polybar secondary &
 $HOME/.config/bspwm/wallpaper.sh
+
+#pkill -f "plank"
+#plank &

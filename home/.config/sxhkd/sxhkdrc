@@ -4,19 +4,23 @@
 #
 
 
+# avoid destroying firefox sessions
+ctrl + q
+    true
+
 # screenshot
 Print
     gnome-screenshot
 
 # audio
 XF86AudioRaiseVolume 
-    pactl set-sink-volume 0 +5% #increase sound volume
+    pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
 XF86AudioLowerVolume
-    pactl set-sink-volume 0 -5% #decrease sound volume
+    pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 XF86AudioMute 
-    pactl set-sink-mute 0 toggle # mute sound
+    pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 XF86AudioMicMute
-    pactl set-source-mute 1 toggle # toggle microphone
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle # toggle microphone
 
 # screen brightness
 XF86MonBrightnessUp 
@@ -34,28 +38,43 @@ super + ctrl + Down
 super + ctrl + Up
     playerctl stop
 
-# lock screen
+# hibernate
+#XF86PowerOff
+#    i3lock -c 000000 -u && sleep 1 && systemctl hibernate
 XF86PowerOff
-    i3lock -c 000000 -u && sleep 1 && systemctl suspend
+    systemctl hibernate
 
+# lock screen
 ctrl + shift + L
-    i3lock -c 000000 -u && sleep 1
+    i3lock -c 000000 -u && sleep 1 #&& xset dpms force off
 
 # terminal emulator
 super + Return
-    gnome-terminal
+    termite
 
 # web browser
-super + shift + Return
-    firefox
+#super + shift + {Return,p,b}
+#    firejail --rlimit-as=5368709120 firefox {_,--private-window,-P broadcast}
+super + shift + {Return,p,b}
+    firefox {_,--private-window,-P broadcast}
 
 # home folder
 ctrl + shift + h
     nautilus -w
 
+# glances
+ctrl + shift + g
+    termite -e glances
+
 # program launcher
+#super + @space
+#    exec bash dmenu_run -b -sb '#106791' -sf '#dfdfdf' -nf '#dfdfdf' -nb '#222222'
+
 super + @space
-    exec bash dmenu_run -b
+    exec bash dmenu_run -b -sb '#d0174a' -sf '#dfdfdf' -nf '#dfdfdf' -nb '#222222'
+
+super + shift + @space
+    rofi -show run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -101,6 +120,10 @@ super + e
 super + {_,shift + }r
     bspc node -R {90,-90}
 
+# change gap
+#super + {_,shift +}n
+#    bspc config window_gap $(($(bspc config window_gap) + {+3,-3}))
+
 #
 # state/flags
 #
@@ -135,11 +158,11 @@ super + {_,shift + }c
 
 # focus the next/previous node in the current desktop
 alt + {_,shift + }Tab
-    bspc node -f {next,prev}.local
+    bspc node -f {next,prev}.local.leaf
 
 # focus the next/previous node in any desktop
 super + {_,shift + }Tab
-    bspc node -f {next,prev}
+    bspc node -f {next,prev}.leaf
 
 # focus the last node in the current desktop
 alt + grave
@@ -232,6 +255,11 @@ ctrl + alt + {_,super + }{j,k}
 # move the node to monitor in the given direction
 shift + ctrl + alt + {h,j,k,l}
     bspc node -m {west,south,north,east} --follow
+
+# toggle focus color
+super + {_,shift + }n
+    
+    bspc config focused_border_color {"#1793d0","#d0174a"}
 
 # receptacle
 #super + shift + Return

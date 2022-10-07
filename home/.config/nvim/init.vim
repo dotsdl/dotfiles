@@ -1,8 +1,9 @@
 set nocompatible              " be iMproved, required
+set mouse=a
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -13,28 +14,27 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-
+" Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
-
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-" Julia support
-Plugin 'JuliaLang/julia-vim'
-
 " jedi
 "Plugin 'zchee/deoplete-jedi'
 Plugin 'davidhalter/jedi-vim'
+
+"Plugin 'suan/vim-instant-markdown'
+Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+"Plugin 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
+"
+"Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'neovim/nvim-lspconfig'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -73,8 +73,8 @@ set background=dark
 colorscheme molokai-dots
 
 " For files with no extension, set filetype as reStructuredText
-au BufNewFile,BufRead * if &ft == '' | set ft=rst | set nocindent | set tw=79 | endif
-au BufNewFile,BufRead *.txt set ft=rst
+"au BufNewFile,BufRead * if &ft == '' | set ft=rst | set nocindent | set tw=79 | endif
+"au BufNewFile,BufRead *.txt set ft=rst
 
 " For files with tex extension, set filetype as tex
 au BufNewFile,BufRead *.tex set ft=tex
@@ -82,6 +82,10 @@ au BufNewFile,BufRead *.tex set ft=tex
 " Python: see  http://wiki.python.org/moin/Vim
 autocmd BufRead,BufNewFile *.py set ai
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
+
+" Xonsh   
+autocmd BufRead,BufNewFile *.xsh set ai
+autocmd BufRead *.xsh set smartindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
 
 " indentation
 au FileType python setl autoindent tabstop=4 expandtab shiftwidth=4 softtabstop=4
@@ -93,6 +97,10 @@ au FileType python setl autoindent tabstop=4 expandtab shiftwidth=4 softtabstop=
 
 " Remap enter in normal mode to insert return
 :nmap <CR> _i<Enter><Esc>k
+
+" Make ctrl-j,k move frame
+:nmap <C-j> <C-e>
+:nmap <C-k> <C-y>
 
 " Enter a blank line below/above cursor in Normal mode.
 " The o command will continue comments in a program.
@@ -144,9 +152,27 @@ autocmd FileType rst nnoremap <expr> k v:count ? 'k' : 'gk'
 
 
 " Markdown:
-au FileType markdown setl wrap number
+au FileType markdown setl wrap
 " j and k don't skip over wrapped lines in following FileTypes, unless given a
 " count
 autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 
+
+"Select text and search with //
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+
+" find and replace selection with Ctrl+r
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" disable semshi colors
+let g:semshi#simplify_markup = v:false
+
+
+" C++ develompent
+" gutentags
+"set tags=./tags;
+"let g:gutentags_ctags_exclude_wildignore = 1
+"let g:gutentags_ctags_exclude = [
+"  \'node_modules', '_build', 'build', 'CMakeFiles', '.mypy_cache', 'venv',
+"  \'*.md', '*.tex', '*.css', '*.html', '*.json', '*.xml', '*.xmls', '*.ui']

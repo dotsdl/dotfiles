@@ -1,10 +1,16 @@
 #!/bin/sh
 
-export SXHKD_SHELL=/bin/bash
+export SXHKD_SHELL=/bin/sh
+
+# for pycharm to work properly
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 sxhkd &
 
+#bspc monitor -d I
+
 bspc config border_width         4
-bspc config window_gap           15
+bspc config window_gap           20
 
 bspc config automatic_scheme     "longest_side"
 bspc config removal_adjustment   none
@@ -15,12 +21,19 @@ bspc config click_to_focus any
 bspc config focus_follows_pointer false
 bspc config initial_polarity      first_child
 
+bspc rule -a Gimp state=floating
+bspc rule -a SAMSON-Core state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
 bspc config bottom_padding 10
 bspc config top_padding 40
 
 ## Border colors
 bspc config normal_border_color "#000000"
-bspc config focused_border_color "#1793d0"
+#bspc config focused_border_color "#1793d0"
+bspc config focused_border_color "#d0174a"
+#bspc config focused_border_color "#1cb4ff"
 bspc config urgent_border_color "#b58900"
 bspc config presel_feedback_color "#1d1d1d"
 
@@ -31,13 +44,56 @@ bspc config remove_unplugged_monitors true
 $HOME/.config/bspwm/wallpaper.sh
 
 # miscellaneous bits
-compton -bc -t -8 -l -9 -r 6 -o 1.0 &
-#devilspie2 &
-#dropbox &
+$HOME/.config/bspwm/picom.sh
 
+#dropbox &
 nm-applet &
 bash -c "xset r rate 200 30"
+bash -c "xset -b"
 /usr/bin/polybar main &
-plank &
-redshift -t 6500:3500 -b 1.0:0.7 &
-xautolock -time 15 -locker "i3lock -c 000000 -u && sleep 1" &
+#redshift -l 33.448376:-112.074036 -t 6500:3500 -b 1.0:0.7 &
+#redshift -t 6500:3500 -b 1.0:0.7 &
+redshift &
+#xautolock -time 9 -locker "i3lock -c 000000 -u && sleep 1" -notifier "xset dpms force off" -notify 0 &
+xautolock -time 9 -locker "i3lock -c 000000 -u && sleep 1" &
+
+# polybar
+#polybar main &
+#$HOME/.config/polybar/launch.sh
+##! /bin/sh
+#
+#sxhkd &
+#
+#bspc config border_width        2
+#bspc config window_gap         12
+#
+#bspc config split_ratio         0.50
+#bspc config borderless_monocle  true
+#bspc config gapless_monocle     true
+#bspc config focus_by_distance   true
+#
+#bspc config remove_unplugged_monitor true
+#bspc config remove_disabled_monitor true
+#
+#
+#bspc window --focus last 
+#
+## set up desktops
+#bspc monitor --reset-desktops 1
+#bspc monitor --add-desktops 2
+#bspc monitor --remove-desktops 2
+#
+#bspc rule -a Gimp desktop=^8 follow=on floating=on
+#bspc rule -a Chromium desktop=^2
+#bspc rule -a mplayer2 floating=on
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
+#bspc rule -a lemonbar floating=on manage=off
+#
+##cd /home/alter/.config/bspwm/panel/ && ./panel &
+#
+## turn off tap to click
+##synclient TapButton1=0
+##synclient TapButton2=0
+##synclient TapButton3=0
+##synclient TapAndDragGesture=0
