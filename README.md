@@ -13,6 +13,7 @@ This repo features configs for the following so far.
 - `sxhkd`: keyboard shortcut daemon
 - `polybar`: status bar
 - `autorandr`: automatic xrandr switching for external monitors
+- `termite`: lightweight terminal emulator based on VTE suitable for tiling window managers
 
 
 ## Setup notes
